@@ -14,31 +14,36 @@ const Auth = () => {
         const {
             target : {name, value}
         } = event;
-        if(name === "email"){
+        if(name === "email") {
             setEmail(value);
-        }else if(name === "password"){
+        } else if(name === "password") {
             setPassword(value);
         }
     };
     const onSubmit = async (event) => {
-        event.preventDefault(); //submit 기본 기능 일시 중지.
+        event.preventDefault(); // submit 기본 기능 일시 중지.
         try {
             let data;
             if(newAccount) {
                 // create newAccount
                 data = await authService.createUserWithEmailAndPassword(email, password);
-            }else {
+            } else {
                 // login
                 data = await authService.signInWithEmailAndPassword(email, password);
-            } 
+            }
             console.log(data);
-        } catch(error) {    
-            console.log(error);
-            setError(error);
-        }    
+        } catch(error) {
+            //console.log(error);
+            setError(error.message);
+        }
     };
     const toggleAccount = (event) => {
-
+        console.log("toggleAccount >>>", newAccount);
+        //setNewAccount(newAccount ? false : true);
+        // setNewAccount(function(prev) {
+        //     return !prev;
+        // });
+        setNewAccount( (prev)=>!prev );
     };
     const onSocialClick = (event) => {
 
@@ -67,7 +72,7 @@ const Auth = () => {
             {error}
           </form>
           <span onClick={toggleAccount}>
-            {newAccount ? "Sign In" : "Create Account"}
+            {newAccount ? "[Sign In]" : "[Create Account]"}
           </span>
           <div>
             <button onClick={onSocialClick} name="google">
