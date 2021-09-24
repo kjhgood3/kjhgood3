@@ -14,10 +14,11 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID
 };
 
-//export default firebase.initializeApp(firebaseConfig);  default는 한개만 반환함
 firebase.initializeApp(firebaseConfig);
 
-export const firebase;
-export const authService = firebase.auth;
-export const dbService = firebase.firestore;
-export const storageService = firebase.storage;
+//export default firebase.initializeApp(firebaseConfig);  default는 한개만 반환함
+
+
+export const authService = firebase.auth();
+export const dbService = firebase.firestore();
+export const storageService = firebase.storage();
